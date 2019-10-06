@@ -78,8 +78,8 @@ empty_message() {
 #   True:0 / False:1
 #######################################
 unable_format() {
-	local first=$(grep -E -n -m 1 "^(${PREFIX_ADD}|${PREFIX_DONT}|${PREFIX_FIX}|${PREFIX_IMPROVE}|${PREFIX_MAKE}|${PREFIX_MERGE}|${PREFIX_MOVE}|${PREFIX_REMOVE}|${PREFIX_REVERT}|${PREFIX_UPDATE}|${PREFIX_USE})[ ]{1}[^ ]{1}" $1 | sed -e 's/:.*//g')
-	if [ "${first}" = "1" ]; then
+	local -r line=$(grep -E -n -m 1 "^(${PREFIX_ADD}|${PREFIX_DONT}|${PREFIX_FIX}|${PREFIX_IMPROVE}|${PREFIX_MAKE}|${PREFIX_MERGE}|${PREFIX_MOVE}|${PREFIX_REMOVE}|${PREFIX_REVERT}|${PREFIX_UPDATE}|${PREFIX_USE})[ ]{1}[^ ]{1}" $1 | sed -e 's/:.*//g')
+	if [ "${line}" = "1" ]; then
 		return 1
 	else
 		err "Unable message format"
@@ -97,7 +97,7 @@ unable_format() {
 #   True:0 / False:1
 #######################################
 multiple_prefix() {
-	cnt=$(grep -E -c "^(${PREFIX_ADD}${PREFIX_DONT}||${PREFIX_FIX}|${PREFIX_IMPROVE}|${PREFIX_MAKE}|${PREFIX_MERGE}|${PREFIX_MOVE}|${PREFIX_REMOVE}|${PREFIX_REVERT}|${PREFIX_UPDATE}|${PREFIX_USE})[ ]{1}[^ ]{1}" $1)
+	local -r cnt=$(grep -E -c "^(${PREFIX_ADD}${PREFIX_DONT}||${PREFIX_FIX}|${PREFIX_IMPROVE}|${PREFIX_MAKE}|${PREFIX_MERGE}|${PREFIX_MOVE}|${PREFIX_REMOVE}|${PREFIX_REVERT}|${PREFIX_UPDATE}|${PREFIX_USE})[ ]{1}[^ ]{1}" $1)
 	if [ ${cnt} -gt 1 ]; then
 		err "Unable to multiple prefix [${cnt}]"
 		return 0
