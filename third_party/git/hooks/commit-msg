@@ -2,11 +2,11 @@
 #
 # An hook script to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
-# that has the commit message.  The hook should exit with non-zero
+# that has the commit log message.  The hook should exit with non-zero
 # status after issuing an appropriate message if it wants to stop the
-# commit.  The hook is allowed to edit the commit message file.
+# commit.  The hook is allowed to edit the commit log message file.
 
-# Enable prefixs
+# Enable prefixes
 readonly PREFIX_ADD="Add"
 readonly PREFIX_DONT="Don't"
 readonly PREFIX_FIX="Fix"
@@ -35,16 +35,16 @@ err() {
 	echo "error: $@" >&2
 	echo "usage: [<prefix>] [<message>] or [<SHA-1>]..."
 	echo
-	echo "Commit message prefixs"
+	echo "Enable commit log message prefixes"
 	echo "    ${PREFIX_ADD}			add something"
 	echo "    ${PREFIX_DONT}		don't use A"
 	echo "    ${PREFIX_FIX}			fix to move correctly (includes typo, crash and rename)"
 	echo "    ${PREFIX_IMPROVE}		only resharper refactor"
 	echo "    ${PREFIX_MAKE}		hand refactor"
-	echo "    ${PREFIX_MERGE}		add SHA-1 to the commit message"
+	echo "    ${PREFIX_MERGE}		add SHA-1 to the commit log message"
 	echo "    ${PREFIX_MOVE}		move code, directory and files"
 	echo "    ${PREFIX_REMOVE}		remove code, directory and files"
-	echo "    ${PREFIX_REVERT}		add SHA-1 to the commit message"
+	echo "    ${PREFIX_REVERT}		add SHA-1 to the commit log message"
 	echo "    ${PREFIX_UPDATE}		update document, comment and test"
 	echo "    ${PREFIX_USE}			use B instead of A, use new A"
 	echo
@@ -71,7 +71,7 @@ empty_message() {
 #######################################
 # Unable to commit log message format
 # Globals:
-#   prefixs
+#   prefixes
 # Arguments:
 #   Commit log message
 # Returns:
@@ -90,7 +90,7 @@ unable_format() {
 #######################################
 # Unable to multiple prefix
 # Globals:
-#   prefixs
+#   prefixes
 # Arguments:
 #   Commit log message
 # Returns:
