@@ -109,7 +109,7 @@ multiple_prefix() {
 #######################################
 # Main
 # Globals:
-#   $1=commit log message
+#   $1=Commit log message
 # Arguments:
 #   None
 # Returns:
