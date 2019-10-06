@@ -97,7 +97,7 @@ unable_format() {
 #   True:0 / False:1
 #######################################
 multiple_prefix() {
-	local -r cnt=$(grep -E -c "^(${PREFIX_ADD}${PREFIX_DONT}||${PREFIX_FIX}|${PREFIX_IMPROVE}|${PREFIX_MAKE}|${PREFIX_MERGE}|${PREFIX_MOVE}|${PREFIX_REMOVE}|${PREFIX_REVERT}|${PREFIX_UPDATE}|${PREFIX_USE})[ ]{1}[^ ]{1}" $1)
+	local -r cnt=$(grep -E -c "^(${PREFIX_ADD}|${PREFIX_DONT}|${PREFIX_FIX}|${PREFIX_IMPROVE}|${PREFIX_MAKE}|${PREFIX_MERGE}|${PREFIX_MOVE}|${PREFIX_REMOVE}|${PREFIX_REVERT}|${PREFIX_UPDATE}|${PREFIX_USE})[ ]{1}[^ ]{1}" $1)
 	if [ ${cnt} -gt 1 ]; then
 		err "Unable to multiple prefix [${cnt}]"
 		return 0
