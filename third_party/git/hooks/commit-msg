@@ -1,0 +1,130 @@
+#!/bin/sh
+#
+# An hook script to check the commit log message.
+# Called by "git commit" with one argument, the name of the file
+# that has the commit message.  The hook should exit with non-zero
+# status after issuing an appropriate message if it wants to stop the
+# commit.  The hook is allowed to edit the commit message file.
+
+# Enable prefixs
+readonly PREFIX_ADD="Add"
+readonly PREFIX_DONT="Don't"
+readonly PREFIX_FIX="Fix"
+readonly PREFIX_IMPROVE="Improve"
+readonly PREFIX_MAKE="Make"
+readonly PREFIX_MERGE="Merge"
+readonly PREFIX_MOVE="Move"
+readonly PREFIX_REMOVE="Remove"
+readonly PREFIX_REVERT="Revert"
+readonly PREFIX_UPDATE="Update"
+readonly PREFIX_USE="Use"
+
+# Error environment
+declare -xr E_DID_NOTHING=1
+
+#######################################
+# Output error message to console
+# Globals:
+#   None
+# Arguments:
+#   Error message
+# Returns:
+#   None
+#######################################
+err() {
+	echo "error: $@" >&2
+	echo "usage: [<prefix>] [<message>] or [<SHA-1>]..."
+	echo
+	echo "Commit message prefixs"
+	echo "    ${PREFIX_ADD}			add something"
+	echo "    ${PREFIX_DONT}		don't use A"
+	echo "    ${PREFIX_FIX}			fix to move correctly (includes typo, crash and rename)"
+	echo "    ${PREFIX_IMPROVE}		only resharper refactor"
+	echo "    ${PREFIX_MAKE}		hand refactor"
+	echo "    ${PREFIX_MERGE}		add SHA-1 to the commit message"
+	echo "    ${PREFIX_MOVE}		move code, directory and files"
+	echo "    ${PREFIX_REMOVE}		remove code, directory and files"
+	echo "    ${PREFIX_REVERT}		add SHA-1 to the commit message"
+	echo "    ${PREFIX_UPDATE}		update document, comment and test"
+	echo "    ${PREFIX_USE}			use B instead of A, use new A"
+	echo
+}
+
+#######################################
+# Empty commit log message
+# Globals:
+#   None
+# Arguments:
+#   Commit log message
+# Returns:
+#   True:0 / False:1
+#######################################
+empty_message() {
+	if [ $# -eq 0 ]; then
+		err "Empty message"
+		return 0
+	else
+		return 1
+	fi
+}
+
+#######################################
+# Unable to commit log message format
+# Globals:
+#   prefixs
+# Arguments:
+#   Commit log message
+# Returns:
+#   True:0 / False:1
+#######################################
+unable_format() {
+	local first=$(grep -E -n -m 1 "^(${PREFIX_ADD}|${PREFIX_DONT}|${PREFIX_FIX}|${PREFIX_IMPROVE}|${PREFIX_MAKE}|${PREFIX_MERGE}|${PREFIX_MOVE}|${PREFIX_REMOVE}|${PREFIX_REVERT}|${PREFIX_UPDATE}|${PREFIX_USE})[ ]{1}[^ ]{1}" $1 | sed -e 's/:.*//g')
+	if [ "${first}" = "1" ]; then
+		return 1
+	else
+		err "Unable message format"
+		return 0
+	fi
+}
+
+#######################################
+# Unable to multiple prefix
+# Globals:
+#   prefixs
+# Arguments:
+#   Commit log message
+# Returns:
+#   True:0 / False:1
+#######################################
+multiple_prefix() {
+	cnt=$(grep -E -c "^(${PREFIX_ADD}${PREFIX_DONT}||${PREFIX_FIX}|${PREFIX_IMPROVE}|${PREFIX_MAKE}|${PREFIX_MERGE}|${PREFIX_MOVE}|${PREFIX_REMOVE}|${PREFIX_REVERT}|${PREFIX_UPDATE}|${PREFIX_USE})[ ]{1}[^ ]{1}" $1)
+	if [ ${cnt} -gt 1 ]; then
+		err "Unable to multiple prefix [${cnt}]"
+		return 0
+	else
+		return 1
+	fi
+}
+
+#######################################
+# Main
+# Globals:
+#   $1=commit log message
+# Arguments:
+#   None
+# Returns:
+#   Success:0 / Error:E_DID_NOTHING
+#######################################
+if empty_message $(cat $1); then
+	exit "${E_DID_NOTHING}"
+fi
+
+if unable_format $1; then
+	exit "${E_DID_NOTHING}"
+fi
+
+if multiple_prefix $1; then
+	exit "${E_DID_NOTHING}"
+fi
+
+exit 0
