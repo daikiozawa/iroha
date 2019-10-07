@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4CF256E8-165A-4645-A870-9EA0B496EB4C}</ProjectGuid>
+    <ProjectGuid>{A809AAC1-B7FF-488D-8687-1B8F831EB04B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>UIAutomationClient</RootNamespace>
     <AssemblyName>UIAutomationClient</AssemblyName>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIAutomationClient", "UIAutomationClient\UIAutomationClient.csproj", "{4CF256E8-165A-4645-A870-9EA0B496EB4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIAutomationClient", "UIAutomation\UIAutomationClient\UIAutomationClient.csproj", "{A809AAC1-B7FF-488D-8687-1B8F831EB04B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4CF256E8-165A-4645-A870-9EA0B496EB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CF256E8-165A-4645-A870-9EA0B496EB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CF256E8-165A-4645-A870-9EA0B496EB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CF256E8-165A-4645-A870-9EA0B496EB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A809AAC1-B7FF-488D-8687-1B8F831EB04B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A809AAC1-B7FF-488D-8687-1B8F831EB04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A809AAC1-B7FF-488D-8687-1B8F831EB04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A809AAC1-B7FF-488D-8687-1B8F831EB04B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
