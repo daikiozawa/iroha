@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace UIAutomationClient
+﻿namespace UIAutomationClient
 {
     /// <summary>
     /// App.xaml の相互作用ロジック
